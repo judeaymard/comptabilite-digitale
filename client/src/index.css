@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-app: #FAFAFA;
+  --bg-surface: #FFFFFF;
+  --obsidian: #0F172A;
+  --obsidian-hover: #1E293B;
+  --text-main: #0F172A;
+  --text-secondary: #64748B;
+  --text-muted: #94A3B8;
+  --border-subtle: #E2E8F0;
+  --border-hairline: #F1F5F9;
+  --positive-emerald: #059669;
+  --negative-rose: #E11D48;
+  --warning-amber: #D97706;
+}
+
+@layer base {
+  body {
+    background-color: #FAFAFA;
+    color: #0F172A;
+    @apply antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+}
+
+/* Light sleek minimal scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #E2E8F0;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #CBD5E1;
+}
+
+/* Épuré SaaS Card utilities */
+.saas-card {
+  background-color: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 1rem;
+  box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.02), 0 1px 2px -1px rgba(15, 23, 42, 0.02);
+}
+
+.saas-card:hover {
+  border-color: #CBD5E1;
+}
+
+/* Subtle input style */
+.saas-input {
+  background-color: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 0.75rem;
+  color: #0F172A;
+  transition: all 0.15s ease-in-out;
+}
+
+.saas-input:focus {
+  outline: none;
+  border-color: #0F172A;
+  box-shadow: 0 0 0 1px #0F172A;
+}
+
+/* Subtle button style */
+.saas-btn-primary {
+  background-color: #0F172A;
+  color: #FFFFFF;
+  font-weight: 500;
+  border-radius: 0.75rem;
+  transition: all 0.15s ease;
+  box-shadow: 0 1px 2px 0 rgba(15, 23, 42, 0.05);
+}
+
+.saas-btn-primary:hover {
+  background-color: #1E293B;
+}
+
+.saas-btn-primary:active {
+  transform: scale(0.98);
+}
+
+

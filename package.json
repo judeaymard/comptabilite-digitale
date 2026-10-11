@@ -1,0 +1,23 @@
+{
+  "name": "comptabilite-produits-digitaux",
+  "version": "1.0.0",
+  "description": "Plateforme SaaS de comptabilité automatisée pour e-commerce et produits digitaux",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "server": "node server/server.js",
+    "test": "node server/services/accountingEngine.test.js",
+    "seed:test": "node server/db/seedTestData.js",
+    "client": "npm --prefix client run dev",
+    "build": "npm --prefix client install && npm --prefix client run build",
+    "build:client": "npm --prefix client run build",
+    "start": "node server/server.js",
+    "dev": "node server/server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "sql.js": "^1.12.0",
+    "xlsx": "^0.18.5"
+  }
+}
