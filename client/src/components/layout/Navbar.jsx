@@ -1,6 +1,7 @@
 import React from 'react';
-import { Plus, RefreshCw, Wallet, Menu, X, ArrowRightLeft } from 'lucide-react';
+import { Plus, RefreshCw, Wallet, Menu, X, ArrowRightLeft, Sun, Moon } from 'lucide-react';
 import { formatFCFA } from '../../utils/formatters';
+import { useTheme } from '../../context/ThemeContext';
 
 export function Navbar({
   settings,
@@ -12,6 +13,7 @@ export function Navbar({
   isMobileMenuOpen,
   onToggleMobileMenu,
 }) {
+  const { toggleTheme, isDark } = useTheme();
   return (
     <header className="sticky top-0 z-30 border-b border-slate-200/80 bg-white/95 backdrop-blur-md px-2.5 sm:px-6 lg:px-8 py-2 sm:py-2.5">
       <div className="w-full flex items-center justify-between gap-1.5 sm:gap-4">
@@ -72,6 +74,27 @@ export function Navbar({
             className="p-1.5 sm:p-2 rounded-xl bg-white border border-slate-200/80 text-slate-500 hover:text-slate-900 hover:bg-slate-50 transition shadow-2xs active:scale-95 shrink-0"
           >
             <RefreshCw className={`h-3.5 w-3.5 sm:h-4 sm:w-4 ${loading ? 'animate-spin text-slate-900' : ''}`} />
+          </button>
+
+          {/* Theme Toggle Button (Sombre / Clair) */}
+          <button
+            onClick={toggleTheme}
+            type="button"
+            title={isDark ? 'Passer en mode clair' : 'Passer en mode sombre'}
+            className="flex items-center space-x-1 sm:space-x-1.5 px-2 sm:px-2.5 py-1.5 sm:py-2 rounded-xl bg-white border border-slate-200/80 text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition shadow-2xs active:scale-95 shrink-0"
+            aria-label="Basculer le mode sombre ou clair"
+          >
+            {isDark ? (
+              <>
+                <Sun className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-amber-500 transition-transform duration-300 rotate-0 hover:rotate-90" />
+                <span className="hidden sm:inline text-xs font-medium">Clair</span>
+              </>
+            ) : (
+              <>
+                <Moon className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-slate-600 transition-transform duration-300 -rotate-12 hover:rotate-0" />
+                <span className="hidden sm:inline text-xs font-medium">Sombre</span>
+              </>
+            )}
           </button>
 
           {/* Primary CTA (Obsidian) */}

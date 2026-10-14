@@ -15,18 +15,41 @@
   --positive-emerald: #059669;
   --negative-rose: #E11D48;
   --warning-amber: #D97706;
+  --chart-grid: #F1F5F9;
+}
+
+.dark {
+  --bg-app: #090D16;
+  --bg-surface: #0F172A;
+  --obsidian: #F8FAFC;
+  --obsidian-hover: #E2E8F0;
+  --text-main: #F8FAFC;
+  --text-secondary: #94A3B8;
+  --text-muted: #64748B;
+  --border-subtle: #1E293B;
+  --border-hairline: #172033;
+  --positive-emerald: #10B981;
+  --negative-rose: #F43F5E;
+  --warning-amber: #F59E0B;
+  --chart-grid: #1E293B;
+  color-scheme: dark;
 }
 
 @layer base {
   body {
     background-color: #FAFAFA;
     color: #0F172A;
-    @apply antialiased;
+    @apply antialiased transition-colors duration-200;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  .dark body {
+    background-color: #090D16;
+    color: #F8FAFC;
   }
 }
 
-/* Light sleek minimal scrollbar */
+/* Light & Dark minimal scrollbar */
 ::-webkit-scrollbar {
   width: 5px;
   height: 5px;
@@ -45,16 +68,35 @@
   background: #CBD5E1;
 }
 
+.dark ::-webkit-scrollbar-thumb {
+  background: #334155;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
 /* Épuré SaaS Card utilities */
 .saas-card {
   background-color: #FFFFFF;
   border: 1px solid #E2E8F0;
   border-radius: 1rem;
   box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.02), 0 1px 2px -1px rgba(15, 23, 42, 0.02);
+  transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .saas-card:hover {
   border-color: #CBD5E1;
+}
+
+.dark .saas-card {
+  background-color: #0F172A;
+  border-color: #1E293B;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+}
+
+.dark .saas-card:hover {
+  border-color: #334155;
 }
 
 /* Subtle input style */
@@ -70,6 +112,17 @@
   outline: none;
   border-color: #0F172A;
   box-shadow: 0 0 0 1px #0F172A;
+}
+
+.dark .saas-input {
+  background-color: #131D31;
+  border-color: #27354F;
+  color: #F8FAFC;
+}
+
+.dark .saas-input:focus {
+  border-color: #10B981;
+  box-shadow: 0 0 0 1px #10B981;
 }
 
 /* Subtle button style */
@@ -90,4 +143,168 @@
   transform: scale(0.98);
 }
 
+.dark .saas-btn-primary {
+  background-color: #10B981;
+  color: #064E3B;
+  font-weight: 600;
+}
 
+.dark .saas-btn-primary:hover {
+  background-color: #34D399;
+}
+
+/* ========================================================================= */
+/* UNIVERSAL DARK THEME SURFACES & PALETTES                                  */
+/* ========================================================================= */
+
+.dark body {
+  background-color: #090D16 !important;
+  color: #F8FAFC !important;
+}
+
+.dark .bg-\[\#FAFAFA\] {
+  background-color: #090D16 !important;
+}
+
+.dark .bg-white {
+  background-color: #0F172A !important;
+}
+
+.dark .bg-white\/95 {
+  background-color: rgba(15, 23, 42, 0.95) !important;
+}
+
+.dark .bg-slate-50 {
+  background-color: #172033 !important;
+}
+
+.dark .bg-slate-100 {
+  background-color: #1E293B !important;
+}
+
+.dark .bg-slate-100\/80 {
+  background-color: rgba(30, 41, 59, 0.8) !important;
+}
+
+.dark .text-slate-900 {
+  color: #F8FAFC !important;
+}
+
+.dark .text-slate-800 {
+  color: #F1F5F9 !important;
+}
+
+.dark .text-slate-700 {
+  color: #E2E8F0 !important;
+}
+
+.dark .text-slate-600 {
+  color: #CBD5E1 !important;
+}
+
+.dark .text-slate-500 {
+  color: #94A3B8 !important;
+}
+
+.dark .text-slate-400 {
+  color: #64748B !important;
+}
+
+/* Borders in dark */
+.dark .border-slate-200,
+.dark .border-slate-200\/80,
+.dark .border-slate-200\/70,
+.dark .border-slate-200\/60,
+.dark .border-slate-100 {
+  border-color: #1E293B !important;
+}
+
+.dark .border-slate-300 {
+  border-color: #334155 !important;
+}
+
+.dark .divide-slate-100 > :not([hidden]) ~ :not([hidden]),
+.dark .divide-slate-200 > :not([hidden]) ~ :not([hidden]),
+.dark .divide-slate-200\/80 > :not([hidden]) ~ :not([hidden]) {
+  border-color: #1E293B !important;
+}
+
+/* Hover states in dark */
+.dark .hover\:bg-slate-50:hover {
+  background-color: #172033 !important;
+}
+
+.dark .hover\:bg-slate-100:hover {
+  background-color: #1E293B !important;
+}
+
+.dark .hover\:text-slate-900:hover {
+  color: #FFFFFF !important;
+}
+
+/* Form controls in dark */
+.dark input:not([type="checkbox"]):not([type="radio"]),
+.dark select,
+.dark textarea {
+  background-color: #131D31 !important;
+  border-color: #27354F !important;
+  color: #F8FAFC !important;
+}
+
+.dark input:focus,
+.dark select:focus,
+.dark textarea:focus {
+  border-color: #10B981 !important;
+}
+
+.dark input::placeholder,
+.dark textarea::placeholder {
+  color: #64748B !important;
+}
+
+/* Emerald accents in dark */
+.dark .text-emerald-700 {
+  color: #34D399 !important;
+}
+
+.dark .text-emerald-800 {
+  color: #6EE7B7 !important;
+}
+
+.dark .bg-emerald-50 {
+  background-color: rgba(5, 150, 105, 0.15) !important;
+}
+
+.dark .border-emerald-200\/60,
+.dark .border-emerald-200 {
+  border-color: rgba(16, 185, 129, 0.3) !important;
+}
+
+/* Rose / Danger accents in dark */
+.dark .bg-rose-50 {
+  background-color: rgba(225, 29, 72, 0.15) !important;
+}
+
+.dark .border-rose-200\/60,
+.dark .border-rose-200,
+.dark .border-rose-200\/80 {
+  border-color: rgba(244, 63, 94, 0.3) !important;
+}
+
+.dark .text-rose-700 {
+  color: #FDA4AF !important;
+}
+
+/* Amber / Warning accents in dark */
+.dark .bg-amber-50 {
+  background-color: rgba(217, 119, 6, 0.15) !important;
+}
+
+.dark .border-amber-200\/60,
+.dark .border-amber-200 {
+  border-color: rgba(245, 158, 11, 0.3) !important;
+}
+
+.dark .text-amber-700 {
+  color: #FCD34D !important;
+}

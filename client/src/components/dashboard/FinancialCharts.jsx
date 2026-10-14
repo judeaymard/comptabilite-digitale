@@ -15,9 +15,16 @@ import {
   ReferenceLine,
 } from 'recharts';
 import { formatDateShort, formatFCFA } from '../../utils/formatters';
+import { useTheme } from '../../context/ThemeContext';
 
 export function FinancialCharts({ records = [] }) {
+  const { isDark } = useTheme();
   const [activeChart, setActiveChart] = useState('capital'); // 'capital' | 'bars' | 'margin'
+
+  const gridColor = isDark ? '#1E293B' : '#F1F5F9';
+  const axisColor = isDark ? '#64748B' : '#94A3B8';
+  const capitalLineColor = isDark ? '#10B981' : '#0F172A';
+  const caBarColor = isDark ? '#38BDF8' : '#0F172A';
 
   const chartData = records.map((r) => ({
     date: r.date,
@@ -112,14 +119,14 @@ export function FinancialCharts({ records = [] }) {
             <AreaChart data={chartData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
               <defs>
                 <linearGradient id="capitalGradientObsidian" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#0F172A" stopOpacity={0.12} />
-                  <stop offset="95%" stopColor="#0F172A" stopOpacity={0.0} />
+                  <stop offset="5%" stopColor={capitalLineColor} stopOpacity={isDark ? 0.25 : 0.12} />
+                  <stop offset="95%" stopColor={capitalLineColor} stopOpacity={0.0} />
                 </linearGradient>
               </defs>
-              <CartesianGrid strokeDasharray="3 3" stroke="#F1F5F9" />
-              <XAxis dataKey="dateLabel" stroke="#94A3B8" fontSize={11} tickLine={false} />
+              <CartesianGrid strokeDasharray="3 3" stroke={gridColor} />
+              <XAxis dataKey="dateLabel" stroke={axisColor} fontSize={11} tickLine={false} />
               <YAxis
-                stroke="#94A3B8"
+                stroke={axisColor}
                 fontSize={11}
                 tickLine={false}
                 tickFormatter={(val) => `${Math.round(val / 1000)}k`}
@@ -129,7 +136,7 @@ export function FinancialCharts({ records = [] }) {
                 type="monotone"
                 dataKey="capitalFinal"
                 name="Capital Final"
-                stroke="#0F172A"
+                stroke={capitalLineColor}
                 strokeWidth={2}
                 fillOpacity={1}
                 fill="url(#capitalGradientObsidian)"
@@ -139,41 +146,41 @@ export function FinancialCharts({ records = [] }) {
         ) : activeChart === 'bars' ? (
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={chartData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#F1F5F9" />
-              <XAxis dataKey="dateLabel" stroke="#94A3B8" fontSize={11} tickLine={false} />
+              <CartesianGrid strokeDasharray="3 3" stroke={gridColor} />
+              <XAxis dataKey="dateLabel" stroke={axisColor} fontSize={11} tickLine={false} />
               <YAxis
-                stroke="#94A3B8"
+                stroke={axisColor}
                 fontSize={11}
                 tickLine={false}
                 tickFormatter={(val) => `${Math.round(val / 1000)}k`}
               />
               <Tooltip content={<CustomTooltip />} />
               <Legend wrapperStyle={{ fontSize: '11px', paddingTop: '10px' }} />
-              <Bar dataKey="ca" name="CA Journalier" fill="#0F172A" radius={[4, 4, 0, 0]} />
-              <Bar dataKey="pub" name="Dépenses Pub" fill="#D97706" radius={[4, 4, 0, 0]} />
-              <Bar dataKey="benefice" name="Bénéfice Net" fill="#059669" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="ca" name="CA Journalier" fill={caBarColor} radius={[4, 4, 0, 0]} />
+              <Bar dataKey="pub" name="Dépenses Pub" fill="#F59E0B" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="benefice" name="Bénéfice Net" fill="#10B981" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         ) : (
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={chartData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#F1F5F9" />
-              <XAxis dataKey="dateLabel" stroke="#94A3B8" fontSize={11} tickLine={false} />
+              <CartesianGrid strokeDasharray="3 3" stroke={gridColor} />
+              <XAxis dataKey="dateLabel" stroke={axisColor} fontSize={11} tickLine={false} />
               <YAxis
-                stroke="#94A3B8"
+                stroke={axisColor}
                 fontSize={11}
                 tickLine={false}
                 tickFormatter={(val) => `${val}%`}
               />
               <Tooltip content={<CustomTooltip />} />
-              <ReferenceLine y={0} stroke="#E11D48" strokeDasharray="3 3" label={{ value: 'Seuil 0%', fill: '#E11D48', fontSize: 10 }} />
+              <ReferenceLine y={0} stroke="#F43F5E" strokeDasharray="3 3" label={{ value: 'Seuil 0%', fill: '#F43F5E', fontSize: 10 }} />
               <Line
                 type="monotone"
                 dataKey="marge"
                 name="Marge %"
-                stroke="#0F172A"
+                stroke={capitalLineColor}
                 strokeWidth={2}
-                dot={{ r: 3, fill: '#0F172A' }}
+                dot={{ r: 3, fill: capitalLineColor }}
                 activeDot={{ r: 5 }}
               />
             </LineChart>

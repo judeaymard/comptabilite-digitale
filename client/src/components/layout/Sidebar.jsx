@@ -11,9 +11,12 @@ import {
   ChevronsRight,
   X,
   LogOut,
+  Sun,
+  Moon,
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useNotification } from '../../context/NotificationContext';
+import { useTheme } from '../../context/ThemeContext';
 
 export function Sidebar({
   currentTab,
@@ -25,6 +28,7 @@ export function Sidebar({
 }) {
   const { user, logout } = useAuth();
   const { confirm, showToast } = useNotification();
+  const { toggleTheme, isDark } = useTheme();
 
   const handleLogout = async () => {
     const ok = await confirm({
@@ -203,6 +207,27 @@ export function Sidebar({
       <div className="space-y-2 pt-3 border-t border-slate-100">
         {!collapsed ? (
           <>
+            {/* Theme Toggle in Expanded Sidebar */}
+            <button
+              onClick={toggleTheme}
+              type="button"
+              className="w-full p-2 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-between text-xs text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition active:scale-98"
+            >
+              <div className="flex items-center space-x-2">
+                {isDark ? (
+                  <Sun className="h-4 w-4 text-amber-500" />
+                ) : (
+                  <Moon className="h-4 w-4 text-slate-600" />
+                )}
+                <span className="font-medium text-[11.5px]">
+                  {isDark ? 'Mode Sombre actif' : 'Mode Clair actif'}
+                </span>
+              </div>
+              <span className="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-white border border-slate-200 text-slate-500">
+                {isDark ? 'Nuit' : 'Jour'}
+              </span>
+            </button>
+
             {/* User Profile Card with integrated Logout */}
             {user && (
               <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-between gap-2">
@@ -237,8 +262,17 @@ export function Sidebar({
             )}
           </>
         ) : (
-          /* Collapsed User & Logout */
+          /* Collapsed User & Logout & Theme */
           <div className="flex flex-col items-center space-y-2">
+            <button
+              onClick={toggleTheme}
+              title={isDark ? 'Passer en mode clair' : 'Passer en mode sombre'}
+              className="p-2 rounded-xl text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition active:scale-95"
+              aria-label="Basculer le mode sombre ou clair"
+            >
+              {isDark ? <Sun className="h-4 w-4 text-amber-500" /> : <Moon className="h-4 w-4" />}
+            </button>
+
             {user && (
               <>
                 <div
